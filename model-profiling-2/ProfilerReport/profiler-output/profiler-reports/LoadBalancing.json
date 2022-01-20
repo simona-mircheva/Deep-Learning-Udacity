@@ -1,0 +1,1 @@
+{"RuleTriggered": 0, "Violations": 0, "Details": {"algo-1": {"workloads": {"gpu0": [2263, 17, 7, 8, 1, 4, 2, 14, 71, 1, 1, 0, 3, 4, 1, 0, 0, 0, 2, 0, 1, 0, 1, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 2, 3, 0, 1, 0, 2]}}}, "Datapoints": 2430, "RuleParameters": "threshold:0.2\npatience:1000"}
