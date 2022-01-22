@@ -8,7 +8,7 @@ from torchvision import datasets, transforms
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, 3, 1)
+        self.conv1 = nn.Conv2d(3, 32, 3, 1)
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
         self.dropout1 = nn.Dropout(0.25)
         self.dropout2 = nn.Dropout(0.5)
@@ -72,9 +72,8 @@ def test(model, test_loader):
 
 def main():
     # Training settings
-    parser = argparse.ArgumentParser(description="PyTorch MNIST Example")
+    parser = argparse.ArgumentParser()
     # TODO: Add your arguments here
-    args = parser.parse_args()
     parser.add_argument(
         "--batch-size",
         type=int,
@@ -100,16 +99,19 @@ def main():
         "--lr", type=float, default=1.0, metavar="LR", help="learning rate (default: 1.0)"
     )
     args = parser.parse_args()
+
     train_kwargs = {"batch_size": args.batch_size}
     test_kwargs = {"batch_size": args.test_batch_size}
 
     transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]# TODO: Create your transform
+        [transforms.ToTensor()]
+    )
+    # TODO: Create your transform
     
     # TODO: Add the CIFAR10 dataset and create your data loaders
     dataset1 = datasets.CIFAR10("../data", train=True, download=True, transform=transform)
     dataset2 = datasets.CIFAR10("../data", train=False, transform=transform)
-    train_loader= torch.utils.data.DataLoader(dataset1, **train_kwargs)
+    train_loader = torch.utils.data.DataLoader(dataset1, **train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
 
     model = Net()
@@ -119,7 +121,8 @@ def main():
     for epoch in range(1, args.epochs + 1):
         train(model, train_loader, optimizer, epoch)
         test(model, test_loader)
-    torch.save(model.state_dict(), "cifar_cnn.pt")
+    torch.save(model.state_dict(), "mnist_cnn.pt")
+    #torch.save(model.state_dict(), "cifar_cnn.pt")
 
 
 if __name__ == "__main__":
